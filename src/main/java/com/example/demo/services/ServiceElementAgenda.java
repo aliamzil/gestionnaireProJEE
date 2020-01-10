@@ -13,7 +13,7 @@ import com.example.demo.beans.elementagenda;
 public class ServiceElementAgenda {
 
 	@Autowired
-	UserDao udao;
+	UserDao userDao;
 	
 	public void modifier(elementagenda ea, String titre, String description, LocalDate date_debut, LocalDate date_fin, String lieu) {
 		ea.setTitre(titre);
@@ -27,7 +27,7 @@ public class ServiceElementAgenda {
 	}
 	public <T> void supprimer(T a) {
 		elementagenda ea = (elementagenda) a;
-		udao.delete(ea.getClass(), ea.getId());
+		userDao.delete(ea.getClass(), ea.getId());
 	}
 
 }

@@ -10,7 +10,7 @@ import com.example.demo.beans.Invitation;
 @Service
 public class ServiceInvitation {
 	@Autowired
-	@Qualifier("GenericDAO")
+	@Qualifier("genericDAO")
 	GenericDAO dao;
 	
 	@Autowired

@@ -18,7 +18,7 @@ import com.example.demo.enums.Role;
 public class ServiceAgendaGroupe extends ServiceAgenda {
 	
 	@Autowired
-	@Qualifier("GenericDAO")
+	@Qualifier("genericDAO")
 	GenericDAO dao;
 	
 	// M�thodes de gestion des utilisateurs membres du groupe (agenda groupe)

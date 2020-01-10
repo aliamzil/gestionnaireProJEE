@@ -20,7 +20,7 @@ import com.example.demo.beans.User;
 public class ServiceUser {
 
 	@Autowired
-	UserDao udao;
+	UserDao userDao;
 	
 	@Autowired
 	CryptitudeDao crpdao;
@@ -33,7 +33,7 @@ public class ServiceUser {
 		System.out.println(pass + " - " + repass);
 
 		User uu = null;
-		uu = udao.chercheruser(pseudo);
+		uu = userDao.chercheruser(pseudo);
 
 		System.out.println("test 0");
 		if (uu != null) {
@@ -41,7 +41,7 @@ public class ServiceUser {
 		}
 
 		User uu2 = null;
-		uu2 = udao.chercheruseremail(mail);
+		uu2 = userDao.chercheruseremail(mail);
 
 		System.out.println("test 0");
 		if (uu2 != null) {
@@ -50,8 +50,8 @@ public class ServiceUser {
 
 		if (pass.equals(repass)) {
 			User u = new User(pseudo, mail, crpdao.cryptage(pass), ddn);
-			udao.create(u);
-			this.envoimail(mail, "signup@agentask.app", "Compte cr��","Cr�ation compte ok, [a href=Lien de confirmation de l'adresse mail]clickez pour confirmer l'adresse mail[/a]");
+			userDao.create(u);
+			this.envoimail(mail, "signup@agentask.app", "Compte créé","Création compte ok, [a href=Lien de confirmation de l'adresse mail]clickez pour confirmer l'adresse mail[/a]");
 			return "ok";
 		} else {
 			return "Le mot de passe de confirmation n'est pas identique au premier !";
@@ -63,7 +63,7 @@ public class ServiceUser {
 		User u1;
 
 		try {
-			u1 = udao.chercheruser(pseudo);
+			u1 = userDao.chercheruser(pseudo);
 			String crpass = crpdao.cryptage(pass);
 			String u1pass = u1.getPass();
 
@@ -89,7 +89,7 @@ public class ServiceUser {
 		case 2:
 			return "Mot de passe incorect";
 		case 3:
-			u1 = udao.chercheruser(pseudo);
+			u1 = userDao.chercheruser(pseudo);
 			session.setAttribute("user", u1);
 			return "ok";
 		default:

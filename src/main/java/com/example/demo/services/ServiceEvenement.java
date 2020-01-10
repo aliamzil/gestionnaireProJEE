@@ -20,14 +20,14 @@ import com.example.demo.beans.User;
 public class ServiceEvenement extends ServiceElementAgenda {
 
 	@Autowired
-	@Qualifier("GenericDAO")
+	@Qualifier("genericDAO")
 	GenericDAO dao;
 	@Autowired
-	UserDao udao;
+	UserDao userDao;
 	
 	public void creer(String titre, String description, LocalDate date_debut, LocalDate date_fin, String lieu, AgendaPerso ap) {
 		Evenement e1 = new Evenement(titre, description, date_debut,date_fin, lieu, ap);
-		udao.create(e1);
+		userDao.create(e1);
 	}
 	public void supprimer(int id) {
 		dao.delete(Evenement.class, id);

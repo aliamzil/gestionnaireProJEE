@@ -7,8 +7,11 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
+import org.springframework.stereotype.Repository;
+
 import com.example.demo.beans.User;
 
+@Repository
 @Transactional
 public class UserDao extends GenericDAO{
 

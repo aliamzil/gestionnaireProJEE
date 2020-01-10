@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.DAO.CryptitudeDao;
@@ -18,19 +20,32 @@ import com.example.demo.services.ServiceUser;
 public class testcontrol {
 	
 	@Autowired
-	UserDao ud;
-	@Autowired
 	ServiceUser su;
     @Autowired
     private JavaMailSender emailSender;
     @Autowired
     CryptitudeDao cd;
+
+	@Autowired
+	UserDao userDao;
+    
     
     @GetMapping(path="/user", produces = "application/json")
     public User users() {
 		User u = new User("toto","toto@toto.fr","123",LocalDate.now());
 		return u;
 	}
+    
+    @GetMapping(path="/finduser/{id}", produces = "application/json")
+	@ResponseBody
+    public User finduser(@PathVariable(name = "id") long id) {
+    	return userDao.findById(User.class, id);
+    }
+    
+    //findById
+    //add
+    
+    
     
     /*
 	@GetMapping(path="/home")
