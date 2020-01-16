@@ -1,7 +1,6 @@
 package com.example.demo.beans;
 
-import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -15,15 +14,15 @@ public class elementagenda extends DbObject {
 	
 	private String titre;
 	private String description;
-	private LocalDate date_debut;
-	private LocalDate date_fin;
+	private LocalDateTime date_debut;
+	private LocalDateTime date_fin;
 	private String lieu;
 	
 	public elementagenda() {
 		super();
 	}
 	
-	public elementagenda(String titre, String description, LocalDate date_debut, LocalDate date_fin, String lieu) {
+	public elementagenda(String titre, String description, LocalDateTime date_debut, LocalDateTime date_fin, String lieu) {
 		super();
 		this.titre = titre;
 		this.description = description;
@@ -44,16 +43,16 @@ public class elementagenda extends DbObject {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public LocalDate getDate_debut() {
+	public LocalDateTime getDate_debut() {
 		return date_debut;
 	}
-	public void setDate_debut(LocalDate date_debut) {
+	public void setDate_debut(LocalDateTime date_debut) {
 		this.date_debut = date_debut;
 	}
-	public LocalDate getDate_fin() {
+	public LocalDateTime getDate_fin() {
 		return date_fin;
 	}
-	public void setDate_fin(LocalDate date_fin) {
+	public void setDate_fin(LocalDateTime date_fin) {
 		this.date_fin = date_fin;
 	}
 	public String getLieu() {

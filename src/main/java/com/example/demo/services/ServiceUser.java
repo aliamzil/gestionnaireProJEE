@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import javax.mail.Message;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.DAO.CryptitudeDao;
 import com.example.demo.DAO.UserDao;
+import com.example.demo.beans.AgendaPerso;
 import com.example.demo.beans.User;
 
 @Service
@@ -28,7 +30,7 @@ public class ServiceUser {
     @Autowired
     private JavaMailSender emailSender;
 
-	public String createuser(String pseudo, String mail, String pass, String repass, LocalDate ddn) {
+	public String createuser(String pseudo, String mail, String pass, String repass, LocalDate ddn, HttpSession session) {
 
 		System.out.println(pass + " - " + repass);
 
@@ -37,7 +39,7 @@ public class ServiceUser {
 
 		System.out.println("test 0");
 		if (uu != null) {
-			return "Pseudo d�ja utilis�";
+			return "Pseudo déja utilisé";
 		}
 
 		User uu2 = null;
@@ -45,12 +47,18 @@ public class ServiceUser {
 
 		System.out.println("test 0");
 		if (uu2 != null) {
-			return "Email d�ja utilis�";
+			return "Email déja utilisé";
 		}
 
 		if (pass.equals(repass)) {
 			User u = new User(pseudo, mail, crpdao.cryptage(pass), ddn);
 			userDao.create(u);
+
+    		AgendaPerso ap = new AgendaPerso("Mon Agenda", "Agenda de " + u.getPseudo(), u);
+    		userDao.create(ap);
+    		
+			session.setAttribute("user", u);
+    		
 			this.envoimail(mail, "signup@agentask.app", "Compte créé","Création compte ok, [a href=Lien de confirmation de l'adresse mail]clickez pour confirmer l'adresse mail[/a]");
 			return "ok";
 		} else {
@@ -114,6 +122,12 @@ public class ServiceUser {
 	}
 	
 	public void passperdu(User u) {
-		this.envoimail(u.getEmail(), "pasrecover@agentask.app", "mot de passe perdu","Blablabla, [a href=lien vers la page de cr�ation de nouveau mot de passe]lien[/a], clickez, la la la");
+		this.envoimail(u.getEmail(), "passrecover@agentask.app", "mot de passe perdu","Blablabla, [a href=lien vers la page de cr�ation de nouveau mot de passe]lien[/a], clickez, la la la");
 	}
+	
+	public void passperdu2(String mail) {
+		this.envoimail(mail, "passrecover@agentask.app", "mot de passe perdu","Blablabla, [a href=lien vers la page de cr�ation de nouveau mot de passe]lien[/a], clickez, la la la");
+	}
+	
+	
 }

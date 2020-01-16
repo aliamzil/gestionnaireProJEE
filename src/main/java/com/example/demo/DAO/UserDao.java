@@ -9,6 +9,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.beans.Action;
+import com.example.demo.beans.AgendaPerso;
 import com.example.demo.beans.User;
 
 @Repository
@@ -40,5 +42,27 @@ public class UserDao extends GenericDAO{
 		if(result.isEmpty()) {return null;}
 		else {return result.get(0);}
 	}
+	
+	public AgendaPerso chercheragendaperso(User u) {
+
+		Query query=em.createQuery("SELECT agendaPerso FROM AgendaPerso agendaPerso WHERE user = ?1");
+		query.setParameter(1, u);
+		
+		List<AgendaPerso> result=query.getResultList();
+		if(result.isEmpty()) {return null;}
+		else {return result.get(0);}
+	}
+	
+	public List<Action> chercheractionsperso(User u) {
+		AgendaPerso ap = this.chercheragendaperso(u);
+		Query query=em.createQuery("SELECT action FROM Action action WHERE ap = ?1");
+		query.setParameter(1, ap);
+		
+		List<Action> result=query.getResultList();
+		if(result.isEmpty()) {return null;}
+		else {return result;}
+	}
+	
+	
 
 }

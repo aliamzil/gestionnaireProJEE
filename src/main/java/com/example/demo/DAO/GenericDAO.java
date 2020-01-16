@@ -79,4 +79,10 @@ public class GenericDAO {
 		return result;
 	}
 	
+//	public <T extends DbObject> long findElementby(Class<T> clazz,String att,String vallatt) throws Exception {
+//		TypedQuery<Long> query=em.createQuery("SELECT entity FROM "+clazz.getName()+" entity WHERE entity."+att+"='"+vallatt+"'", Long.class);
+//		List<Long> result=query.getResultList();
+//		return result;
+//	}
+	
 }

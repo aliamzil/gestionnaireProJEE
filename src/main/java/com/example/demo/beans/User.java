@@ -1,5 +1,6 @@
 package com.example.demo.beans;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Component;
  
 @Entity
 @Component
-public class User extends DbObject {
+public class User extends DbObject implements Serializable {
 
 	@Column(length = 50)
 	private String pseudo;

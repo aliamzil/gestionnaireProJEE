@@ -1,12 +1,11 @@
 package com.example.demo.services;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.DAO.UserDao;
-import com.example.demo.beans.Action;
 import com.example.demo.beans.elementagenda;
 
 @Service
@@ -15,7 +14,7 @@ public class ServiceElementAgenda {
 	@Autowired
 	UserDao userDao;
 	
-	public void modifier(elementagenda ea, String titre, String description, LocalDate date_debut, LocalDate date_fin, String lieu) {
+	public void modifier(elementagenda ea, String titre, String description, LocalDateTime date_debut, LocalDateTime date_fin, String lieu) {
 		ea.setTitre(titre);
 		ea.setDescription(description);
 		ea.setDate_debut(date_debut);

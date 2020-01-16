@@ -1,7 +1,6 @@
 package com.example.demo.beans;
 
-import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -18,7 +17,7 @@ public class Action extends elementagenda {
 		super();
 	}
 
-	public Action(String titre, String description, LocalDate date_debut, LocalDate date_fin, String lieu, AgendaPerso ap) {
+	public Action(String titre, String description, LocalDateTime date_debut, LocalDateTime date_fin, String lieu, AgendaPerso ap) {
 		super(titre, description, date_debut, date_fin, lieu);
 		this.ap = ap;
 	}

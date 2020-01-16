@@ -1,6 +1,6 @@
 package com.example.demo.services;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,7 +10,6 @@ import com.example.demo.DAO.GenericDAO;
 import com.example.demo.DAO.UserDao;
 import com.example.demo.beans.Action;
 import com.example.demo.beans.AgendaPerso;
-import com.example.demo.beans.elementagenda;
 
 @Service
 public class ServiceAction extends ServiceElementAgenda {
@@ -22,14 +21,14 @@ public class ServiceAction extends ServiceElementAgenda {
 	@Qualifier("genericDAO")
 	GenericDAO genericDAO;
 	
-	public void creer(String titre, String description, LocalDate date_debut, LocalDate date_fin, String lieu, AgendaPerso ap) {
+	public void creer(String titre, String description, LocalDateTime date_debut, LocalDateTime date_fin, String lieu, AgendaPerso ap) {
 		Action a1 = new Action(titre, description, date_debut,date_fin, lieu, ap);
 		userDao.create(a1);
 	}
 	public void supprimer(int id) {
 		userDao.delete(Action.class, id);
 	}
-	public void modifier(Action a, String titre, String description, LocalDate date_debut, LocalDate date_fin, String lieu) {
+	public void modifier(Action a, String titre, String description, LocalDateTime date_debut, LocalDateTime date_fin, String lieu) {
 		a.setTitre(titre);
 		a.setDescription(description);
 		a.setDate_debut(date_debut);

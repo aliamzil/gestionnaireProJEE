@@ -11,9 +11,9 @@ public class AgendaPerso extends Agenda {
 	
 	public AgendaPerso(String intitule, String description, User user) {
 		super(intitule, description);
-		// TODO Auto-generated constructor stub
+		this.user = user;
 	}
-	
+
 	public AgendaPerso() {
 		super();
 		// TODO Auto-generated constructor stub

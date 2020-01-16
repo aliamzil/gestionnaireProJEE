@@ -3,10 +3,20 @@ package com.example.demo.beans;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+
+@Entity
 public abstract class Agenda extends DbObject {
+	
+	
 	private String intitule;
+	
 	private String description;
+	
+	@OneToMany
 	private List<Action> todolist = new ArrayList<Action>();
+	
 //  Dans Agenda Groupe
 //	private List<Sondage> sondagelist = new ArrayList<Sondage>();
     // --- ATRIBUTS CONFIG --- //
