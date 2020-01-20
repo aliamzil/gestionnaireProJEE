@@ -10,7 +10,10 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.beans.Action;
+import com.example.demo.beans.AgendaGroupe;
 import com.example.demo.beans.AgendaPerso;
+import com.example.demo.beans.Evenement;
+import com.example.demo.beans.ListUsers;
 import com.example.demo.beans.User;
 
 @Repository
@@ -59,6 +62,25 @@ public class UserDao extends GenericDAO{
 		query.setParameter(1, ap);
 		
 		List<Action> result=query.getResultList();
+		if(result.isEmpty()) {return null;}
+		else {return result;}
+	}
+	
+	public List<Evenement> chercherevent(AgendaGroupe ag) {
+		Query query=em.createQuery("SELECT evenement FROM Evenement evenement WHERE ag = ?1");
+		query.setParameter(1, ag);
+		
+		List<Evenement> result=query.getResultList();
+		if(result.isEmpty()) {return null;}
+		else {return result;}
+	}
+	
+	public List<ListUsers> chercherusersag(long idag) {
+		AgendaGroupe ag = this.findById(AgendaGroupe.class, idag);
+		Query query=em.createQuery("SELECT listusers FROM ListUsers listusers WHERE ag = ?1");
+		query.setParameter(1, ag);
+		
+		List<ListUsers> result=query.getResultList();
 		if(result.isEmpty()) {return null;}
 		else {return result;}
 	}

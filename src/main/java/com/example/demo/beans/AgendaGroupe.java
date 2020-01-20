@@ -1,29 +1,21 @@
 package com.example.demo.beans;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-
-import org.hibernate.annotations.ManyToAny;
-
-import com.example.demo.enums.Role;
 
 
 @Entity
 public class AgendaGroupe extends Agenda {
 	
+//	@Autowired
+//	UserDao userDao;
+	
 	private int idAgendaGroupe;
 	
 	private String titre;
-	
-	private HashMap<Long, Role> lstu = new HashMap<Long, Role>();
 	
 	@OneToMany
 	private List<Sondage> lstsnd = new ArrayList<Sondage>();
@@ -59,17 +51,10 @@ public class AgendaGroupe extends Agenda {
 		this.titre = titre;
 	}
 
-	public HashMap<Long, Role> getLstu() {
-		return lstu;
-	}
-
-	public void setLstu(HashMap<Long, Role> lstu) {
-		this.lstu = lstu;
-	}
-	
-	public void putLstu(User u, Role role) {
-		this.lstu.put(u.getId(), role);
-	}
+//	public void putLstu(User u, Role role) {
+//		ListUsers lu = new ListUsers(this,u,role);
+//		userDao.create(lu);
+//	}
 
 	public List<Sondage> getLstsnd() {
 		return lstsnd;

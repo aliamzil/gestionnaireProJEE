@@ -4,43 +4,46 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 @DiscriminatorValue("evenement")
 public class Evenement extends elementagenda {
 	
 	@ManyToOne
-	private AgendaPerso ap;
+	private AgendaGroupe ag;
 	
-	@OneToMany
+	@ManyToMany
 	private List<User> liste_participants=new ArrayList<User>();
+	
+//	@ElementCollection
+//	protected Set<User> nickNames = new HashSet();
+
 
 	public Evenement() {
 		super();
 	}
 
-	public Evenement(String titre, String description, LocalDateTime date_debut, LocalDateTime date_fin, String lieu, AgendaPerso ap) {
+	public Evenement(String titre, String description, LocalDateTime date_debut, LocalDateTime date_fin, String lieu, AgendaGroupe ag) {
 		super(titre, description, date_debut, date_fin, lieu);
-		this.ap = ap;
+		this.ag = ag;
 	}
 
-	public Evenement(AgendaPerso ap, List<User> liste_participants) {
+	public Evenement(AgendaGroupe ag, List<User> liste_participants) {
 		super();
-		this.ap = ap;
+		this.ag = ag;
 		this.liste_participants = liste_participants;
 	}
 
-	public AgendaPerso getAp() {
-		return ap;
+	public AgendaGroupe getAg() {
+		return ag;
 	}
 
-	public void setAp(AgendaPerso ap) {
-		this.ap = ap;
+	public void setAg(AgendaGroupe ag) {
+		this.ag = ag;
 	}
 
 	public List<User> getListe_participants() {
@@ -49,6 +52,10 @@ public class Evenement extends elementagenda {
 
 	public void setListe_participants(List<User> liste_participants) {
 		this.liste_participants = liste_participants;
+	}
+	
+	public void addToListe_participants(User u) {
+		this.liste_participants.add(u);
 	}
 
 	

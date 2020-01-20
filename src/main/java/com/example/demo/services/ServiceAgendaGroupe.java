@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.DAO.GenericDAO;
 import com.example.demo.beans.AgendaGroupe;
 import com.example.demo.beans.Invitation;
+import com.example.demo.beans.ListUsers;
 import com.example.demo.beans.Sondage;
 import com.example.demo.beans.User;
 import com.example.demo.enums.Role;
@@ -24,8 +25,10 @@ public class ServiceAgendaGroupe extends ServiceAgenda {
 	
 	public void creerAgendaGroupe(User u, String intitule, String description, String titre) {
 		AgendaGroupe ag = new AgendaGroupe(intitule, description, titre);
-		ag.putLstu(u, Role.Administrateur);
+
+		ListUsers lu = new ListUsers(ag,u,Role.Administrateur);		
 		dao.create(ag);
+		dao.create(lu);
 	}
 	
 	// M�thodes de gestion des utilisateurs membres du groupe (agenda groupe)
@@ -39,13 +42,15 @@ public class ServiceAgendaGroupe extends ServiceAgenda {
 	public void exclure(User u,HashMap<User, Role> l) {
 		l.remove(u);
 	}
+	
 	// M�thodes de gestion des sondages
 	public void supprimer_sondage(AgendaGroupe agGr,Sondage sondage) {
 		agGr.getLstsnd().remove(agGr.getLstsnd().indexOf(sondage));
 	}
 	
 	public void adduser(AgendaGroupe ag, User u) {
-		ag.putLstu(u, Role.Visiteur);
-		dao.update(ag);
+		ListUsers lu = new ListUsers(ag,u,Role.Membre);
+		System.out.println("--------------> " + u.getPseudo());
+		dao.create(lu);
 	}
 }

@@ -2,11 +2,19 @@ package com.example.demo.beans;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
  
 @Entity
 @Component
@@ -22,6 +30,10 @@ public class User extends DbObject implements Serializable {
 	private String pass;
 	
 	private LocalDate date;
+	
+	@ManyToMany(mappedBy = "liste_participants")
+	@JsonIgnore
+	public List<Evenement> lste = new ArrayList<Evenement>();
 	
 	/**
 	 * @param pseudo
@@ -65,5 +77,10 @@ public class User extends DbObject implements Serializable {
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
-	
+	public List<Evenement> getLste() {
+		return lste;
+	}
+	public void setLste(List<Evenement> lste) {
+		this.lste = lste;
+	}
 }

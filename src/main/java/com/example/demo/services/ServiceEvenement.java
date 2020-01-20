@@ -1,7 +1,6 @@
 package com.example.demo.services;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.DAO.GenericDAO;
 import com.example.demo.DAO.UserDao;
-import com.example.demo.beans.AgendaPerso;
+import com.example.demo.beans.AgendaGroupe;
 import com.example.demo.beans.Evenement;
-import com.example.demo.beans.Invitation;
 import com.example.demo.beans.User;
 
 @Service
@@ -24,8 +22,8 @@ public class ServiceEvenement extends ServiceElementAgenda {
 	@Autowired
 	UserDao userDao;
 	
-	public void creer(String titre, String description, LocalDateTime date_debut, LocalDateTime date_fin, String lieu, AgendaPerso ap) {
-		Evenement e1 = new Evenement(titre, description, date_debut,date_fin, lieu, ap);
+	public void creer(String titre, String description, LocalDateTime date_debut, LocalDateTime date_fin, String lieu, AgendaGroupe ag) {
+		Evenement e1 = new Evenement(titre, description, date_debut,date_fin, lieu, ag);
 		userDao.create(e1);
 	}
 	public void supprimer(int id) {
